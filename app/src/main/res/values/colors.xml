@@ -2,4 +2,26 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--Black Transparent-->
+    <color name="BlackTransparent10">#1A000000</color>
+    <color name="BlackTransparent20">#33000000</color>
+    <color name="BlackTransparent30">#4D000000</color>
+    <color name="BlackTransparent40">#66000000</color>
+    <color name="BlackTransparent50">#80000000</color>
+    <color name="BlackTransparent60">#99000000</color>
+    <color name="BlackTransparent70">#B3000000</color>
+    <color name="BlackTransparent80">#CC000000</color>
+    <color name="BlackTransparent90">#E6000000</color>
+
+    <!--White Transparent-->
+    <color name="WhiteTransparent10">#1AFFFFFF</color>
+    <color name="WhiteTransparent20">#33FFFFFF</color>
+    <color name="WhiteTransparent30">#4DFFFFFF</color>
+    <color name="WhiteTransparent40">#66FFFFFF</color>
+    <color name="WhiteTransparent50">#8FFFFFF0</color>
+    <color name="WhiteTransparent60">#99FFFFFF</color>
+    <color name="WhiteTransparent70">#B3FFFFFF</color>
+    <color name="WhiteTransparent80">#CCFFFFFF</color>
+    <color name="WhiteTransparent90">#E6FFFFFF</color>
 </resources>

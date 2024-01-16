@@ -39,11 +39,9 @@ class NewsViewModel @Inject constructor(
             } else {
                 headlines.postValue(Resource.Error("Internet is not available!"))
             }
-
         } catch (e: Exception) {
             headlines.postValue(Resource.Error(e.message.toString()))
         }
-
     }
 
 }

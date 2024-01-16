@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.ibrahimcanerdogan.nves.data.model.News
 import com.ibrahimcanerdogan.nves.databinding.ActivityHomeBinding
 import com.ibrahimcanerdogan.nves.util.NewsCategory
@@ -18,8 +19,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    private var _binding: ActivityHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivityHomeBinding
 
     private val viewModel by lazy {
         ViewModelProvider(this, factory).get(NewsViewModel::class.java)
@@ -29,19 +29,28 @@ class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var newsAdapter: NewsAdapter
 
+    private var page = 0
+    private var isLoading = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        viewModel.getNewsHeadLines(context = this, country = "us", category = NewsCategory.BUSINESS.param, page = 0)
+        viewModel.getNewsHeadLines(context = this, country = "us", category = NewsCategory.BUSINESS.param, page = page)
         viewModel.headlinesData.observe(this, ::setData)
+
+        binding.viewPager.apply {
+            adapter = newsAdapter
+        }
     }
 
     private fun setData(resource: Resource<News>?) {
         when(resource) {
             is Resource.Success -> {
                 resource.data?.let {
+                    newsAdapter.differ.submitList(it.articles?.toList())
                     Log.i("HomeActivity", it.status)
                 }
             }
