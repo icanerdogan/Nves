@@ -13,9 +13,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class NewsViewModel(
+class NewsViewModel @Inject constructor(
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
 ) : ViewModel() {
 
@@ -24,7 +25,7 @@ class NewsViewModel(
         get() = headlines
 
     fun getNewsHeadLines(
-        @ApplicationContext context: Context? = null,
+        context: Context? = null,
         country: String,
         category: String,
         page: Int

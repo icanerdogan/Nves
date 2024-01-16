@@ -1,9 +1,10 @@
 package com.ibrahimcanerdogan.nves.data.model
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serial
+import java.util.UUID
 
 data class Article(
+    val articleUUID : String = UUID.randomUUID().toString(),
     @SerializedName("author")
     val articleAuthor: String?,
     @SerializedName("content")
