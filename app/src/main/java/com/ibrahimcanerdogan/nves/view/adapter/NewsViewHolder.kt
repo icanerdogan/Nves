@@ -1,6 +1,7 @@
 package com.ibrahimcanerdogan.nves.view.adapter
 
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,8 +18,8 @@ class NewsViewHolder(
         binding.apply {
             card.setOnClickListener { onNewsItemClick?.invoke(article) }
             textTitle.text = article.articleTitle
-            textDate.text = article.articlePublishedAt
-            textContent.text = article.articleContent ?: ""
+            textDate.text = article.articlePublishedAt!!.split("T")[0]
+            textDescription.text = article.articleDescription ?: ""
 
             setImage(article, imageViewBackground)
             setImage(article, imageViewThumbnail)
