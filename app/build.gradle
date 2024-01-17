@@ -67,6 +67,8 @@ dependencies {
     // Glide
     implementation libs.glide
 
+    implementation libs.lottie
+
     // Expandable Layout
     implementation libs.expandableLayout
 }

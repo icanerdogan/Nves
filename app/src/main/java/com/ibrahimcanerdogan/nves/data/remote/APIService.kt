@@ -18,7 +18,7 @@ interface APIService {
         @Query("page")
         page: Int,
         @Query("apiKey")
-        apiKey: String = "6953a7421bb749c589e687746c85eee8"
+        apiKey: String = "b4984ae3a8ae47549738b33257fe9ca9"
     ): Response<News>
 
 }

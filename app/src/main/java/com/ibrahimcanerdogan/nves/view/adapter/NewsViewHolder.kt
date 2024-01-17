@@ -1,12 +1,15 @@
 package com.ibrahimcanerdogan.nves.view.adapter
 
+import android.content.Context
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.ibrahimcanerdogan.nves.R
 import com.ibrahimcanerdogan.nves.data.model.Article
 import com.ibrahimcanerdogan.nves.databinding.ItemNewsBinding
 
 class NewsViewHolder(
-    val binding : ItemNewsBinding,
+    private val binding : ItemNewsBinding,
     private val onNewsItemClick : ((Article) -> Unit)?
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -17,13 +20,15 @@ class NewsViewHolder(
             textDate.text = article.articlePublishedAt
             textContent.text = article.articleContent ?: ""
 
-            Glide.with(root.context)
-                .load(article.articleUrlToImage)
-                .into(imageViewBackground)
+            setImage(article, imageViewBackground)
+            setImage(article, imageViewThumbnail)
 
-            Glide.with(root.context)
-                .load(article.articleUrlToImage)
-                .into(imageViewThumbnail)
         }
+    }
+
+    private fun setImage(article: Article, imageView: ImageView) {
+        Glide.with(binding.root.context)
+            .load(if(!article.articleUrlToImage.isNullOrEmpty()) article.articleUrlToImage else R.drawable.news_background)
+            .into(imageView)
     }
 }
