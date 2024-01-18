@@ -1,7 +1,9 @@
 <div align="center">
   
   # NVES : Daily Special News
-  ![NVES Logo](https://github.com/icanerdogan/Nves/assets/52867508/52ad0150-ffa0-433e-ba09-4a7a1d97f051)
+  
+  Business News            |  Technology News
+  :-------------------------:|:-------------------------:
+  ![Business News](https://github.com/icanerdogan/Nves/assets/52867508/5e547fd5-c863-4335-8040-5424190cbaa2) | ![Technology News](https://github.com/icanerdogan/Nves/assets/52867508/b1aa8d6c-06a7-486d-9c37-1e554f651073)
 
 </div>
-
