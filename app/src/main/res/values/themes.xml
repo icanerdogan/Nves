@@ -2,7 +2,18 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Nves" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimaryDark">@color/black</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
     </style>
 
-    <style name="Theme.Nves" parent="Base.Theme.Nves" />
+    <style name="Widget.App.CardView" parent="Widget.Material3.CardView.Outlined">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Card</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.MediumComponent</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Card" parent="">
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/white</item>
+        <item name="colorPrimary">@color/black</item>
+    </style>
 </resources>

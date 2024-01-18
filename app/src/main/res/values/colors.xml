@@ -3,6 +3,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <!-- Color Palette-->
+    <color name="MainLigth">#BBE1FA</color>
+    <color name="MainBlue">#3282B8</color>
+    <color name="MainDarkBlue">#0F4C75</color>
+    <color name="MainBlack">#1B262C</color>
+
     <!--Black Transparent-->
     <color name="BlackTransparent10">#1A000000</color>
     <color name="BlackTransparent20">#33000000</color>

@@ -1,5 +1,6 @@
 package com.ibrahimcanerdogan.nves
 
+import android.graphics.Color
 import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.card.MaterialCardView
 import com.ibrahimcanerdogan.nves.data.model.Article
 import com.ibrahimcanerdogan.nves.data.model.News
 import com.ibrahimcanerdogan.nves.databinding.ActivityHomeBinding
@@ -37,6 +39,7 @@ class HomeActivity : AppCompatActivity() {
 
     private var page = 1
     private var totalResults = 0
+    private var newsCategory: String = NewsCategory.BUSINESS.param
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,11 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getNewsHeadLines(context = this, country = "us", category = NewsCategory.TECHNOLOGY.param, page = page)
+        // Categories configuration.
+        binding.setCategoryCard()
+        binding.layoutCategory.cardBusiness.setCardBackgroundColor(getColor(R.color.MainLigth))
+
+        viewModel.getNewsHeadLines(context = this, country = "us", category = newsCategory, page = page)
         viewModel.headlinesData.observe(this, ::setData)
 
         binding.viewPager.apply {
@@ -79,26 +86,63 @@ class HomeActivity : AppCompatActivity() {
     private val scrollListener = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-
             if (position == newsAdapter.itemCount - 1) {
-                showLoadingAnimation(true)
                 page += 1
                 if (page == (totalResults / 20) + 2 ) page = 1 // If max page ((totalResults / 20) + 1) + 1 make return first
-
-                Handler(Looper.getMainLooper()).postDelayed({
-                    viewModel.getNewsHeadLines(
-                        context = this@HomeActivity,
-                        country = "us",
-                        category = NewsCategory.TECHNOLOGY.param,
-                        page = page
-                    )
-                },1000)
-
-                binding.viewPager.currentItem = 0
+                updateNewsHeadlines()
             }
         }
     }
 
+    private fun updateNewsHeadlines() {
+        showLoadingAnimation(true)
+        Handler(Looper.getMainLooper()).postDelayed({
+            viewModel.getNewsHeadLines(
+                context = this@HomeActivity,
+                country = "us",
+                category = newsCategory,
+                page = page
+            )
+        }, 1000)
+
+        binding.viewPager.currentItem = 0
+    }
+
+    private fun ActivityHomeBinding.setCategoryCard() {
+        layoutCategory.apply {
+            setCategoryInfo(cardBusiness, NewsCategory.BUSINESS.param)
+            setCategoryInfo(cardEntertainment, NewsCategory.ENTERTAINMENT.param)
+            setCategoryInfo(cardGeneral, NewsCategory.GENERAL.param)
+            setCategoryInfo(cardHealth, NewsCategory.HEALTH.param)
+            setCategoryInfo(cardScience, NewsCategory.SCIENCE.param)
+            setCategoryInfo(cardSports, NewsCategory.SPORTS.param)
+            setCategoryInfo(cardTechnology, NewsCategory.TECHNOLOGY.param)
+        }
+    }
+
+    private fun setCategoryInfo(card: MaterialCardView, categoryParam: String) {
+        card.setOnClickListener {
+            if (newsCategory != categoryParam) {
+                setUnSelectCategoryCard()
+                page = 1
+                newsCategory = categoryParam
+                updateNewsHeadlines()
+                card.setCardBackgroundColor(getColor(R.color.MainLigth))
+            }
+        }
+    }
+
+    private fun setUnSelectCategoryCard() {
+        with(binding.layoutCategory) {
+            cardBusiness.setCardBackgroundColor(getColor(R.color.white))
+            cardEntertainment.setCardBackgroundColor(getColor(R.color.white))
+            cardGeneral.setCardBackgroundColor(getColor(R.color.white))
+            cardHealth.setCardBackgroundColor(getColor(R.color.white))
+            cardScience.setCardBackgroundColor(getColor(R.color.white))
+            cardSports.setCardBackgroundColor(getColor(R.color.white))
+            cardTechnology.setCardBackgroundColor(getColor(R.color.white))
+        }
+    }
     private fun showLoadingAnimation(isShown: Boolean = false) {
         with(binding){
             lottieAnimation.visibility = if (isShown) View.VISIBLE else View.INVISIBLE
