@@ -2,6 +2,8 @@ package com.ibrahimcanerdogan.nves
 
 import android.opengl.Visibility
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -57,19 +59,20 @@ class HomeActivity : AppCompatActivity() {
                 resource.data?.let {
                     newsAdapter.differ.submitList(it.articles?.toList())
                     totalResults = it.totalResults
-                    binding.viewPager.currentItem = 0
                     showLoadingAnimation()
-                    Log.i("HomeActivity", it.status)
+                    Log.i(TAG, it.status)
                 }
             }
             is Resource.Error -> {
-                showLoadingAnimation()
-                Log.e("HomeActivity", "Error!")
+                resource.message?.let { error ->
+                    showLoadingAnimation()
+                    Log.e(TAG, error)
+                }
             }
             is Resource.Loading -> {
                 showLoadingAnimation(true)
             }
-            else -> Log.d("HomeActivity", "Resource not found!")
+            else -> Log.d(TAG, "Resource not found!")
         }
     }
 
@@ -78,25 +81,33 @@ class HomeActivity : AppCompatActivity() {
             super.onPageSelected(position)
 
             if (position == newsAdapter.itemCount - 1) {
+                showLoadingAnimation(true)
                 page += 1
                 if (page == (totalResults / 20) + 2 ) page = 1 // If max page ((totalResults / 20) + 1) + 1 make return first
 
-                viewModel.getNewsHeadLines(
-                    context = this@HomeActivity,
-                    country = "us",
-                    category = NewsCategory.BUSINESS.param,
-                    page = page
-                )
-                showLoadingAnimation(true)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    viewModel.getNewsHeadLines(
+                        context = this@HomeActivity,
+                        country = "us",
+                        category = NewsCategory.TECHNOLOGY.param,
+                        page = page
+                    )
+                },1000)
+
+                binding.viewPager.currentItem = 0
             }
         }
     }
 
     private fun showLoadingAnimation(isShown: Boolean = false) {
-        binding.lottieAnimation.visibility = if (isShown) View.VISIBLE else View.INVISIBLE
+        with(binding){
+            lottieAnimation.visibility = if (isShown) View.VISIBLE else View.INVISIBLE
+            viewPager.visibility= if (isShown) View.INVISIBLE else View.VISIBLE
+        }
+
     }
 
     companion object {
-
+        private val TAG = HomeActivity::class.simpleName.toString()
     }
 }
