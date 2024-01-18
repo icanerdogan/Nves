@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_bold"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -49,7 +50,7 @@
             android:layout_marginTop="8dp"
             android:text="Date"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_medium"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -59,7 +60,7 @@
             android:layout_marginTop="16dp"
             android:text="Description"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_medium"/>
 
     </LinearLayout>
