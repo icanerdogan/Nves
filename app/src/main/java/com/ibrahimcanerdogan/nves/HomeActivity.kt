@@ -73,6 +73,7 @@ class HomeActivity : AppCompatActivity() {
             is Resource.Error -> {
                 resource.message?.let { error ->
                     showLoadingAnimation()
+                    viewModel.getNewsHeadLines(context = this, country = "us", category = newsCategory, page = page)
                     Log.e(TAG, error)
                 }
             }
