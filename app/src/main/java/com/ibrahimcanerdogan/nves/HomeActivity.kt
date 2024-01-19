@@ -1,21 +1,18 @@
 package com.ibrahimcanerdogan.nves
 
-import android.graphics.Color
-import android.opengl.Visibility
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import android.widget.Toast
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.card.MaterialCardView
-import com.ibrahimcanerdogan.nves.data.model.Article
 import com.ibrahimcanerdogan.nves.data.model.News
 import com.ibrahimcanerdogan.nves.databinding.ActivityHomeBinding
 import com.ibrahimcanerdogan.nves.util.NewsCategory
@@ -25,6 +22,7 @@ import com.ibrahimcanerdogan.nves.view.viewmodel.NewsViewModel
 import com.ibrahimcanerdogan.nves.view.viewmodel.NewsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -45,9 +43,6 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        }
         enableEdgeToEdge()
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -155,6 +150,28 @@ class HomeActivity : AppCompatActivity() {
             viewPager.visibility= if (isShown) View.INVISIBLE else View.VISIBLE
         }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        fullScreenMode()
+    }
+    override fun onResume() {
+        super.onResume()
+        fullScreenMode()
+    }
+
+    private fun fullScreenMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+            if (window.insetsController != null) {
+                window.insetsController!!.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                window.insetsController!!.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        }
     }
 
     companion object {
