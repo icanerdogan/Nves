@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context=".HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
-        <androidx.appcompat.widget.AppCompatTextView
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="center|top"
+                android:src="@drawable/background_banner" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/buttonDrawerMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:background="@android:color/transparent"
+                android:padding="15dp"
+                android:src="@drawable/icon_menu" />
+        </FrameLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="nves"
-            android:textColor="@color/white"
-            android:textSize="50sp"
-            android:fontFamily="@font/abrilfatface" />
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation_graph"/>
     </LinearLayout>
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginEnd="5dp"
-        android:scrollbars="none">
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/layout_header_drawer"
+        app:menu="@menu/navigation_drawer" />
 
-        <include android:id="@+id/layoutCategory"
-            layout="@layout/layout_news_category"/>
-    </HorizontalScrollView>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieAnimation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            app:lottie_fileName="loading.json"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            android:visibility="visible"/>
-    </FrameLayout>
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

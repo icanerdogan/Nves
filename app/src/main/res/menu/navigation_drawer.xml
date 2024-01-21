@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuLocation"
+        android:title="Location">
+        <menu>
+            <item
+                android:id="@+id/itemLocation"
+                android:icon="@drawable/icon_location"
+                android:title="Location"
+                android:checkable="false"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menuCommunicate"
+        android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/itemShare"
+                android:icon="@drawable/icon_share"
+                android:title="Share"
+                android:checkable="false"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/itemReview"
+                android:icon="@drawable/icon_review"
+                android:title="Rate!"
+                android:checkable="false"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+</menu>
