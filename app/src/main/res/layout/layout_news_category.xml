@@ -13,10 +13,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="5dp"
         app:cardCornerRadius="50dp"
+        app:strokeColor="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:checkable="true">
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewBusiness"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -35,10 +37,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="5dp"
         app:cardCornerRadius="50dp"
+        app:strokeColor="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:checkable="true">
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewEntertainment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -57,10 +61,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="5dp"
         app:cardCornerRadius="50dp"
+        app:strokeColor="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:checkable="true">
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewGeneral"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -79,10 +85,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="5dp"
         app:cardCornerRadius="50dp"
+        app:strokeColor="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:checkable="true">
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewHealth"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -101,10 +109,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="5dp"
         app:cardCornerRadius="50dp"
+        app:strokeColor="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:checkable="true">
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewScience"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -123,10 +133,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="5dp"
         app:cardCornerRadius="50dp"
+        app:strokeColor="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:checkable="true">
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewSports"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -145,10 +157,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="5dp"
         app:cardCornerRadius="50dp"
+        app:strokeColor="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:checkable="true">
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewTechnology"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
