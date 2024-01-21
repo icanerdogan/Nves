@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.card.MaterialCardView
@@ -55,23 +56,24 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Categories configuration.
-        binding.setCategoryCard()
-        binding.layoutCategory.cardBusiness.setCardBackgroundColor(requireContext().getColor(R.color.MainLigth))
+        with(binding) {
+            // Categories configuration.
+            setCategoryCard()
+            isCategorySelected(true, layoutCategory.cardBusiness, layoutCategory.textViewBusiness)
 
-        viewModel.getNewsHeadLines(
-            context = requireContext(),
-            country = "us",
-            category = newsCategory,
-            page = page
-        )
-        viewModel.headlinesData.observe(viewLifecycleOwner, ::setData)
+            viewModel.getNewsHeadLines(
+                context = requireContext(),
+                country = "us",
+                category = newsCategory,
+                page = page
+            )
+            viewModel.headlinesData.observe(viewLifecycleOwner, ::setData)
 
-        binding.viewPager.apply {
-            adapter = newsAdapter
-            registerOnPageChangeCallback(scrollListener)
+            viewPager.apply {
+                adapter = newsAdapter
+                registerOnPageChangeCallback(scrollListener)
+            }
         }
-
     }
 
     private fun setData(resource: Resource<News>?) {
@@ -134,37 +136,37 @@ class NewsFragment : Fragment() {
 
     private fun FragmentNewsBinding.setCategoryCard() {
         layoutCategory.apply {
-            setCategoryInfo(cardBusiness, NewsCategory.BUSINESS.param)
-            setCategoryInfo(cardEntertainment, NewsCategory.ENTERTAINMENT.param)
-            setCategoryInfo(cardGeneral, NewsCategory.GENERAL.param)
-            setCategoryInfo(cardHealth, NewsCategory.HEALTH.param)
-            setCategoryInfo(cardScience, NewsCategory.SCIENCE.param)
-            setCategoryInfo(cardSports, NewsCategory.SPORTS.param)
-            setCategoryInfo(cardTechnology, NewsCategory.TECHNOLOGY.param)
+            setCategoryInfo(cardBusiness, textViewBusiness, NewsCategory.BUSINESS.param)
+            setCategoryInfo(cardEntertainment, textViewEntertainment, NewsCategory.ENTERTAINMENT.param)
+            setCategoryInfo(cardGeneral, textViewGeneral, NewsCategory.GENERAL.param)
+            setCategoryInfo(cardHealth, textViewHealth, NewsCategory.HEALTH.param)
+            setCategoryInfo(cardScience, textViewScience, NewsCategory.SCIENCE.param)
+            setCategoryInfo(cardSports, textViewSports, NewsCategory.SPORTS.param)
+            setCategoryInfo(cardTechnology, textViewTechnology, NewsCategory.TECHNOLOGY.param)
         }
     }
 
-    private fun setCategoryInfo(card: MaterialCardView, categoryParam: String) {
+    private fun setCategoryInfo(card: MaterialCardView, textView: AppCompatTextView, categoryParam: String) {
         card.setOnClickListener {
             if (newsCategory != categoryParam) {
                 setUnSelectCategoryCard()
                 page = 1
                 newsCategory = categoryParam
                 updateNewsHeadlines()
-                card.setCardBackgroundColor(requireContext().getColor(R.color.MainLigth))
+                isCategorySelected(true, card, textView)
             }
         }
     }
 
     private fun setUnSelectCategoryCard() {
         with(binding.layoutCategory) {
-            cardBusiness.setCardBackgroundColor(requireContext().getColor(R.color.white))
-            cardEntertainment.setCardBackgroundColor(requireContext().getColor(R.color.white))
-            cardGeneral.setCardBackgroundColor(requireContext().getColor(R.color.white))
-            cardHealth.setCardBackgroundColor(requireContext().getColor(R.color.white))
-            cardScience.setCardBackgroundColor(requireContext().getColor(R.color.white))
-            cardSports.setCardBackgroundColor(requireContext().getColor(R.color.white))
-            cardTechnology.setCardBackgroundColor(requireContext().getColor(R.color.white))
+            isCategorySelected(false, cardBusiness, textViewBusiness)
+            isCategorySelected(false, cardEntertainment, textViewEntertainment)
+            isCategorySelected(false, cardGeneral, textViewGeneral)
+            isCategorySelected(false, cardHealth, textViewHealth)
+            isCategorySelected(false, cardScience, textViewScience)
+            isCategorySelected(false, cardSports, textViewSports)
+            isCategorySelected(false, cardTechnology, textViewTechnology)
         }
     }
 
@@ -173,7 +175,16 @@ class NewsFragment : Fragment() {
             lottieAnimation.visibility = if (isShown) View.VISIBLE else View.INVISIBLE
             viewPager.visibility = if (isShown) View.INVISIBLE else View.VISIBLE
         }
+    }
 
+    private fun isCategorySelected(selected: Boolean, card: MaterialCardView, textView: AppCompatTextView) {
+        if (selected) {
+            card.setCardBackgroundColor(requireContext().getColor(R.color.black))
+            textView.setTextColor(requireContext().getColor(R.color.white))
+        } else {
+            card.setCardBackgroundColor(requireContext().getColor(R.color.white))
+            textView.setTextColor(requireContext().getColor(R.color.black))
+        }
     }
 
     override fun onDestroyView() {
