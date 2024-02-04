@@ -2,7 +2,6 @@ package com.ibrahimcanerdogan.nves.data.remote
 
 import com.ibrahimcanerdogan.nves.data.model.News
 import com.ibrahimcanerdogan.nves.util.NewsCategory
-import net.cachapa.expandablelayout.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
