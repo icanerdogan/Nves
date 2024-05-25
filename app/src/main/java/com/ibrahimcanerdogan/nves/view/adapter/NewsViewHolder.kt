@@ -13,11 +13,10 @@ import com.ibrahimcanerdogan.nves.data.model.Article
 import com.ibrahimcanerdogan.nves.databinding.ItemNewsBinding
 
 class NewsViewHolder(
-    private val binding : ItemNewsBinding,
-    private val onNewsItemClick : ((Article) -> Unit)?
+    private val binding : ItemNewsBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    val circularProgressDrawable = CircularProgressDrawable(binding.root.context)
+    private val circularProgressDrawable = CircularProgressDrawable(binding.root.context)
 
     fun bind(article: Article) {
 

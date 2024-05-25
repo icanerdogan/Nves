@@ -10,8 +10,6 @@ import com.ibrahimcanerdogan.nves.databinding.ItemNewsBinding
 
 class NewsAdapter : RecyclerView.Adapter<NewsViewHolder>() {
 
-    var onNewsItemClick: ((Article) -> Unit)? = null
-
     private val callback = object : DiffUtil.ItemCallback<Article>(){
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.articleUUID == newItem.articleUUID
@@ -25,7 +23,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return NewsViewHolder(binding, onNewsItemClick)
+        return NewsViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
